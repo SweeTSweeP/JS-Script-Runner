@@ -1,5 +1,6 @@
 package com.morhenbigot.js_script_runner;
 
+import com.morhenbigot.js_script_runner.entities.ScriptRunner;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -21,23 +22,15 @@ public class JsScriptRunnerApplication implements CommandLineRunner {
 
         Arrays.stream(args).forEach(System.out::println);
 
-        var jsEngine = (Invocable) new ScriptEngineManager().getEngineByName("nashorn");
+        for (int i = 0; i < 5; i++) {
 
-        try {
+            var thread = new ScriptRunner();
 
-            String script = "var list = [1, 2, 3, 4, 5];" +
-                    "var result = '';" +
-                    "for each (var i in list) {" +
-                    "result+=i+'-';" +
-                    "};" +
-                    "print(result);";
+            thread.setName(String.format("Thread #%d", i));
 
-            var result = jsEngine.invokeFunction(script);
+            String script = String.format("print('%s');", thread.getName());
 
-            var i = 0;
-        } catch (final ScriptException se) {
-
-            se.printStackTrace();
+            thread.run(script);
         }
     }
 }
