@@ -5,8 +5,7 @@ import delight.nashornsandbox.NashornSandboxes;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import javax.script.ScriptEngine;
-import javax.script.ScriptEngineManager;
+import java.util.concurrent.Executors;
 
 @Configuration
 public class ScriptEngineConfigurator {
@@ -20,6 +19,12 @@ public class ScriptEngineConfigurator {
 
     @Bean(name = "scriptEngine")
     public NashornSandbox getScriptEngine() {
+
+        scriptEngine.setMaxCPUTime(15000);
+        //scriptEngine.setMaxMemory(50*1024);
+        scriptEngine.allowNoBraces(false);
+        scriptEngine.setMaxPreparedStatements(30);
+        scriptEngine.setExecutor(Executors.newSingleThreadExecutor());
 
         return scriptEngine;
     }
