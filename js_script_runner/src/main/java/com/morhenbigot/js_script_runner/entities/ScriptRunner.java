@@ -1,24 +1,16 @@
 package com.morhenbigot.js_script_runner.entities;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import delight.nashornsandbox.NashornSandbox;
 
-import javax.script.ScriptEngine;
-import javax.script.ScriptEngineManager;
-import javax.script.ScriptException;
+import javax.script.*;
 
 public class ScriptRunner extends Thread {
 
-    @Autowired
-    private ScriptEngine scriptEngine;
-
-    synchronized public void run(String script) {
-
+    synchronized public Object run(NashornSandbox scriptEngine, String script) {
         try {
-
-            scriptEngine.eval(script);
+            return scriptEngine.eval(script);
         } catch (ScriptException e) {
-
-            e.printStackTrace();
+            return e;
         }
     }
 }

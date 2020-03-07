@@ -47,6 +47,11 @@
             <version>RELEASE</version>
             <scope>compile</scope>
         </dependency>
+        <dependency>
+            <groupId>org.javadelight</groupId>
+            <artifactId>delight-nashorn-sandbox</artifactId>
+            <version>LATEST</version>
+        </dependency>
     </dependencies>
 
     <build>

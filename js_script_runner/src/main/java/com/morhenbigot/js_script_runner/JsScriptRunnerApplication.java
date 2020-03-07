@@ -21,16 +21,5 @@ public class JsScriptRunnerApplication implements CommandLineRunner {
     public void run(String... args) throws Exception {
 
         Arrays.stream(args).forEach(System.out::println);
-
-        for (int i = 0; i < 5; i++) {
-
-            var thread = new ScriptRunner();
-
-            thread.setName(String.format("Thread #%d", i));
-
-            String script = String.format("print('%s');", thread.getName());
-
-            thread.run(script);
-        }
     }
 }
